@@ -16,26 +16,38 @@ public class InterfaceWithGrandExchange extends NovaScript {
     @Override
     public int runScript() {
 
+        log("Script running: InterfaceWithGrandExchange");
+        this.openGrandExchange();
+
         if (GrandExchange.isReadyToCollect()) {
+            log("Ready to collect");
             GrandExchange.collect();
         }
 
         if (Inventory.contains(7936) || Inventory.contains(7937)) {
-            GrandExchange.sellItem("Pure Essence", Inventory.count("Pure Essence"), 2);
+            log("Pure ess found in inventory!");
+            GrandExchange.sellItem("Pure essence", Inventory.count("Pure essence"), 2);
         }
 
-        if (!this.hasBuyOfferForItem("Pure Essence")) {
-            GrandExchange.buyItem("Pure Essence", Math.min(1000000, Inventory.count("Coins")), 1);
+        if (!this.hasBuyOfferForItem("Pure essence")) {
+            log("No buy offer for pure ess found");
+            GrandExchange.buyItem("Pure essence", Math.min(1000000, Inventory.count("Coins")), 1);
         }
-
-
 
         return 3000;
     }
 
+    private void openGrandExchange() {
+        if (GrandExchange.isOpen()) {
+            return;
+        }
+        GrandExchange.open();
+    }
+
     @Override
     public boolean isComplete() {
-        return !GrandExchange.isReadyToCollect();
+        return false;
+//        return !GrandExchange.isReadyToCollect();
     }
 
 //    public boolean verifyBuyOffers() {
@@ -59,7 +71,10 @@ public class InterfaceWithGrandExchange extends NovaScript {
 
     public boolean hasBuyOfferForItem(String itemName) {
         return Arrays.stream(GrandExchange.getItems())
-                .anyMatch(item -> item.getName().equalsIgnoreCase(itemName) && item.isBuyOffer());
+                .anyMatch(item -> {
+                    log("Item from stream: " + item.getName());
+                   return item.getName().equalsIgnoreCase(itemName) && item.isBuyOffer();
+                });
     }
 
     private double calculatePercentFulfilled(int current, int total) {
