@@ -1,5 +1,4 @@
-package InterfaceWithGrandExchange;
-
+package scripts.InterfaceWithGrandExchange;
 
 import nova.NovaScript;
 import org.dreambot.api.methods.container.impl.Inventory;
@@ -14,9 +13,9 @@ public class InterfaceWithGrandExchange extends NovaScript {
     }
 
     @Override
-    public int runScript() {
+    public int tick() {
 
-        log("Script running: InterfaceWithGrandExchange");
+        log("Script running: scripts.InterfaceWithGrandExchange.InterfaceWithGrandExchange");
         this.openGrandExchange();
 
         if (GrandExchange.isReadyToCollect()) {
