@@ -14,7 +14,7 @@ public class MakeShells extends NovaScript {
     }
 
     @Override
-    public int runScript() {
+    public int tick() {
         log("Crafting pie shells");
         if (Inventory.contains(ItemID.PIE_DISH, ItemID.PASTRY_DOUGH)) {
             Inventory.getRandom(ItemID.PIE_DISH).useOn(ItemID.PASTRY_DOUGH);

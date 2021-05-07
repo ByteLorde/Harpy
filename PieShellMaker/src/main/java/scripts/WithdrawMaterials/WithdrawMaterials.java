@@ -14,7 +14,7 @@ public class WithdrawMaterials extends NovaScript {
     }
 
     @Override
-    public int runScript() {
+    public int tick() {
         log("Withdrawing mats");
         if (!Bank.isOpen()) {
             Bank.openClosest();

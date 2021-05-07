@@ -13,7 +13,7 @@ public class DepositShells extends NovaScript {
     }
 
     @Override
-    public int runScript() {
+    public int tick() {
         log("Depositing pie shells");
         if (!Bank.isOpen()) {
             Bank.openClosest();

@@ -9,7 +9,7 @@ import org.dreambot.api.script.ScriptManifest;
 import org.dreambot.api.wrappers.widgets.WidgetChild;
 
 @ScriptManifest(name = "Pie Shell Maker2", description = "Makes the pie shells2", author = "Refreshed", version = 1.01, category = Category.MISC, image = "")
-public class PieShellMakerBot2 extends AbstractScript {
+public class PieShellMaker2 extends AbstractScript {
 
     private String state;
     public final int WITHDRAW_AMOUNT = 14;

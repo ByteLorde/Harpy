@@ -32,6 +32,7 @@ public class NovaScriptFactory {
     }
 
     public static NovaScript loadScript(String scriptEntryName) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        System.out.println(scriptEntryName);
         String[] pieces = scriptEntryName.split("/");
         String name = pieces[1];
         String classPath = String.format("scripts.%s.%s", name, name);

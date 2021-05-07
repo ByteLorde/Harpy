@@ -1,17 +1,17 @@
-import nova.NovaBot;
+import nova.SingleStateNovaBot;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManifest;
 
 @ScriptManifest(name = "Pie Shell Maker", description = "Makes the pie shells", author = "Refreshed", version = 1.01, category = Category.MISC, image = "")
-public class PieShellMakerBot extends NovaBot {
+public class PieShellMaker extends SingleStateNovaBot {
 
-    public PieShellMakerBot() {
-        super(PieShellMakerBot.class.getName());
+    public PieShellMaker() {
+        super(PieShellMaker.class.getName());
 
-        String[] scripts = new String[] {
-            "WithdrawMaterials",
-            "MakeShells",
-            "DepositShells"
+        String[] scripts = new String[]{
+                "WithdrawMaterials",
+                "MakeShells",
+                "DepositShells"
         };
 
         this.loadScripts(scripts);
