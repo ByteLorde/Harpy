@@ -3,7 +3,6 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/PieShellMaker2/pom.xml" />
         <option value="$PROJECT_DIR$/PieShellMaker/pom.xml" />
       </list>
     </option>
