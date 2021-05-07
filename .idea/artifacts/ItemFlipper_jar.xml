@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ItemFlipper:jar">
+    <output-path>$USER_HOME$/DreamBot/Scripts</output-path>
+    <root id="archive" name="ItemFlipper.jar">
+      <element id="module-output" name="ItemFlipper" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Nova/out/artifacts/Nova_jar/Nova.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

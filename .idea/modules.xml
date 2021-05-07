@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Harpy.iml" filepath="$PROJECT_DIR$/Harpy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ItemFlipperBot/ItemFlipperBot.iml" filepath="$PROJECT_DIR$/ItemFlipperBot/ItemFlipperBot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PieShellMaker/PieShellMaker.iml" filepath="$PROJECT_DIR$/PieShellMaker/PieShellMaker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PieShellMaker2/PieShellMaker2.iml" filepath="$PROJECT_DIR$/PieShellMaker2/PieShellMaker2.iml" />
+    </modules>
+  </component>
+</project>
