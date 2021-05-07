@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Nova:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Nova_jar</output-path>
+    <root id="archive" name="Nova.jar">
+      <element id="module-output" name="Nova" />
+      <element id="module-output" name="Harpy" />
+    </root>
+  </artifact>
+</component>
