@@ -104,7 +104,7 @@ public class {{REPLACE_ME}} extends SingleStateNovaBot {
   </component>
 </module>"""
 
-    XML_FILE = """\n\t\t\t<module fileurl="file://$PROJECT_DIR$/{{REPLACE_ME}}/{{REPLACE_ME}}.iml" filepath="$PROJECT_DIR$/{{REPLACE_ME}}/{{REPLACE_ME}}.iml" />"""
+    XML_FILE = """\n\t\t\t<module fileurl="file://$PROJECT_DIR$/scripts/{{REPLACE_ME}}/{{REPLACE_ME}}.iml" filepath="$PROJECT_DIR$/{{REPLACE_ME}}/{{REPLACE_ME}}.iml" />"""
 
 class ColoredTerminal:
 
