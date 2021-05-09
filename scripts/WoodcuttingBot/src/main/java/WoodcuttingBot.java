@@ -2,16 +2,16 @@ import nova.SingleStateNovaBot;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManifest;
     
-@ScriptManifest(name = "WoodCutting", 
-                description = "A Bot titled WoodCutting", 
+@ScriptManifest(name = "WoodcuttingBot", 
+                description = "A Bot titled WoodcuttingBot", 
                 category = Category.MISC,
                 author = "Anonymous", 
                 version = 1.01, 
                 image = "")           
-public class WoodCutting extends SingleStateNovaBot {
+public class WoodcuttingBot extends SingleStateNovaBot {
 
-    public WoodCutting() {
-        super(WoodCutting.class.getName());
+    public WoodcuttingBot() {
+        super(WoodcuttingBot.class.getName());
 
         // Scripts for the bot to load. Ordered.
         String[] scripts = new String[] {
