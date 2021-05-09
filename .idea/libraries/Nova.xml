@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Nova">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/Nova_jar/Nova.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

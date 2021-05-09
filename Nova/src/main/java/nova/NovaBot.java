@@ -51,6 +51,4 @@ public abstract class NovaBot extends NovaScript {
     public LinkedList<NovaScript> getScriptsAsLinkedList() {
         return new LinkedList<>(Arrays.asList(this.scripts));
     }
-
-
 }
