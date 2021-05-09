@@ -207,12 +207,12 @@ else:
     javaHandle.close()
 
     ColoredTerminal.printYellow('Adding to .idea modules...')
-    modulesXML = open('.idea\\modules.xml', 'r')
+    modulesXML = open('..\\.idea\\modules.xml', 'r')
     content = modulesXML.read()
     modulesXML.close()
 
     content = content.replace('<modules>', '<modules>' + BotFileContents.XML_FILE.replace('{{REPLACE_ME}}', scriptName))
-    modulesXML = open('.idea\\modules.xml', 'w')
+    modulesXML = open('..\\.idea\\modules.xml', 'w')
 
     modulesXML.write(content)
     modulesXML.close()
