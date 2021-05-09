@@ -1,7 +1,5 @@
-import sys
 import os
 import time
-args = sys.argv[1::]
 
 class ColoredTerminal:
 
@@ -37,12 +35,3 @@ class ColoredTerminal:
     def print(text, end='\n'):
         print(text, end=end)
         time.sleep(.4)
-
-ColoredTerminal.printGreen('Welcome to', end=' ')
-ColoredTerminal.printRed('Nova CLI')
-
-if len(args) == 0:
-    ColoredTerminal.print('Please try again with a proper command.')
-else:
-    command = ' '.join(args)
-    os.system(command)

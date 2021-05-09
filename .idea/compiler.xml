@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PieShellMaker" />
+        <module name="Harpy" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Harpy" target="1.5" />
       <module name="PieShellMaker" target="8" />
-      <module name="PieShellMaker2" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
