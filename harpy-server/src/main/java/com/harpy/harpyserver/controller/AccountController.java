@@ -1,22 +1,24 @@
 package com.harpy.harpyserver.controller;
 
 import com.harpy.harpyserver.entity.AccountData;
+import com.harpy.harpyserver.service.FirebaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/accounts")
 public class AccountController {
+
+    private final FirebaseService firebaseService;
 
     @GetMapping
     public List<AccountData> getAllAccounts() {
-        return new ArrayList<>();
+        return this.firebaseService.getAllAccounts();
     }
 
 }

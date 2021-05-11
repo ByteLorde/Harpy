@@ -1,9 +1,15 @@
 package com.harpy.harpyserver.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 
 @Data
+@Getter
+@Setter
 public class AccountData {
 
     public String id;
@@ -12,6 +18,6 @@ public class AccountData {
     public int pin;
     public String status;
     public String taskId;
-    public String[] tags;
+    public List<String> tags;
     public Object config;
 }
