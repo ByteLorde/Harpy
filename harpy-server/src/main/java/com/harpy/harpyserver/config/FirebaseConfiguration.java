@@ -1,43 +1,41 @@
-package com.harpy.harpyserver.repository;
+package com.harpy.harpyserver.config;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-import com.harpy.harpyserver.HarpyServerApplication;
-import org.springframework.boot.SpringApplication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-@Component
-public class FirebaseRepository {
+@Configuration
+@RequiredArgsConstructor
+public class FirebaseConfiguration {
 
-    Firestore db;
+    private final FirebaseProperties firebaseProperties;
 
-    public FirebaseRepository() {
+    @Bean
+    public Firestore firestore() {
         try {
-            InputStream serviceAccount = new FileInputStream("C:\\Users\\bytel\\Workspace\\Harpy\\harpy-server\\src\\main\\resources\\json\\serviceAccount.json");
+            InputStream serviceAccount = new FileInputStream(ResourceUtils.getFile(this.firebaseProperties.getServiceAccountUrl()));
             GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(credentials)
                     .build();
             FirebaseApp.initializeApp(options);
 
-            this.db = FirestoreClient.getFirestore();
+            return FirestoreClient.getFirestore();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return null;
     }
 
-    public CollectionReference getCollection(String collectionName) {
-        return this.db.collection(collectionName);
-    }
 }
+

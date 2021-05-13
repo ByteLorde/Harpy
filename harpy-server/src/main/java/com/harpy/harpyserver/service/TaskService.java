@@ -1,67 +1,55 @@
 package com.harpy.harpyserver.service;
-import java.util.*;
 
-import com.google.cloud.firestore.CollectionReference;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.harpy.harpyserver.entity.AccountData;
-import com.harpy.harpyserver.model.DreambotConfiguration;
-import com.harpy.harpyserver.model.FirebaseCollection;
+import com.harpy.harpyserver.model.ScriptRequirement;
 import com.harpy.harpyserver.model.TaskConfiguration;
-import com.harpy.harpyserver.model.TaskStatus;
-import com.harpy.harpyserver.repository.FirebaseRepository;
-import com.harpy.harpyserver.util.NumberUtil;
+import com.harpy.harpyserver.repository.ScriptRequirementRepository;
+import com.harpy.harpyserver.repository.TaskRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.ExecutionException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
+@RequiredArgsConstructor
 public class TaskService {
 
-    public final FirebaseRepository firebaseRepository;
-    private CollectionReference tasksRepository;
+    private final TaskRepository taskRepository;
+    private final ScriptRequirementRepository scriptRequirementRepository;
 
-    public TaskService(FirebaseRepository firebaseRepository) {
-        this.firebaseRepository = firebaseRepository;
-        this.tasksRepository = this.firebaseRepository.getCollection(FirebaseCollection.TASKS);
-    }
+    public List<TaskConfiguration> getTasks(Integer botCapacity) {
 
-    // TODO: Some mock stuff fam
-    public void publishRandomTask() {
+        List<TaskConfiguration> selectedTasks = new ArrayList<>();
 
-        String[] accountUsernames = new String[] { "DannyWalters@gmail.com", "OrangeJacket@ruby.org", "Christ@God.me" };
-        String[] accountPasswords = new String[] {"forever66", "Ruby21", "21forty21"};
+        List<TaskConfiguration> taskConfigurations = this.taskRepository.findAll();
+        taskConfigurations.sort(Comparator.comparingInt(t -> t.priority));
 
-        String taskId = UUID.randomUUID().toString();
-        TaskConfiguration task = new TaskConfiguration();
-
-        task.setTaskId(taskId);
-        task.status = TaskStatus.NOT_STARTED;
-        task.tags = Arrays.asList("Bandos Bot - {AED734}", "PVM");
-
-        List<DreambotConfiguration> dreambotConfigurations = new ArrayList<>();
-
-        for (int i = 0; i < 3; i++) {
-            DreambotConfiguration dreambotConfiguration = new DreambotConfiguration();
-            dreambotConfiguration.setAccountUsername(accountUsernames[i]);
-            dreambotConfiguration.setAccountPassword(accountPasswords[i]);
-            dreambotConfiguration.setParams(Arrays.asList("Script Param 1", "Script Param 2", "Script Param 3"));
-            dreambotConfiguration.setProxy(String.format("%d.%d.%d.%d/%d", NumberUtil.getRandomNumber(111, 255), NumberUtil.getRandomNumber(111, 255), NumberUtil.getRandomNumber(111, 255), NumberUtil.getRandomNumber(111, 255), NumberUtil.getRandomNumber(111, 255)));
-            dreambotConfiguration.setScript("BandosBot");
-            dreambotConfiguration.setWorld("31");
-
-            dreambotConfigurations.add(dreambotConfiguration);
+        while (botCapacity > 0 && !taskConfigurations.isEmpty()) {
+            TaskConfiguration selectedTask = taskConfigurations.remove(0);
+            selectedTasks.add(selectedTask);
+            botCapacity -= selectedTask.botNames.size();
         }
-
-        task.setDreambotConfigurations(dreambotConfigurations);
-        this.tasksRepository.document(taskId).set(task);
+        return selectedTasks;
     }
 
-    public TaskConfiguration getTask(String taskId) throws ExecutionException, InterruptedException {
-        Map<String, Object> dataRaw = this.tasksRepository.document(taskId).get().get().getData();
-
-        Gson gson = new Gson();
-        JsonElement jsonElement = gson.toJsonTree(Objects.requireNonNull(dataRaw));
-        return gson.fromJson(jsonElement, TaskConfiguration.class);
+    private List<String> getScripts(List<TaskConfiguration> taskConfigurations) {
+        return taskConfigurations.stream().flatMap(config -> config.botNames.stream()).collect(Collectors.toList());
     }
+
+    public List<ScriptRequirement> getScriptRequirements(List<String> botNames) {
+        return botNames.stream()
+                .map(this.scriptRequirementRepository::findByName)
+                .flatMap(optional -> optional.map(Stream::of).orElseGet(Stream::empty))
+                .collect(Collectors.toList());
+    }
+
+    public List<ScriptRequirement> getScriptRequirements(Integer capacity) {
+        List<TaskConfiguration> tasks = this.getTasks(capacity);
+        List<String> scripts = this.getScripts(tasks);
+        return this.getScriptRequirements(scripts);
+    }
+
 }

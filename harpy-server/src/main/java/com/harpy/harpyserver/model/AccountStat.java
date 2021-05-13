@@ -1,6 +1,6 @@
 package com.harpy.harpyserver.model;
 
-public class PlayerStat {
+public class AccountStat {
     Integer experience;
     Integer level;
 }
