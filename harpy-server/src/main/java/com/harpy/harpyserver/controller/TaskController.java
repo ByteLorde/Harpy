@@ -37,7 +37,6 @@ public class TaskController {
         tasks.forEach(task -> {
             List<ScriptRequirement> requirements = taskService.getScriptRequirements(task.botNames);
             List<AccountDetails> accounts = this.accountFulfillmentService.getAccounts(requirements);
-            System.out.println("Accounts chosen: " + accounts);
             task.accountNames = accounts.stream().map(AccountDetails::getUsername).collect(Collectors.toList());
             task.dreambotConfigurations = accounts.stream().map(this.dreambotCommandMapper::map).collect(Collectors.toList());
         });

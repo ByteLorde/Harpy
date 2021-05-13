@@ -26,7 +26,32 @@ public class DreambotCommandMapper {
         DreambotConfiguration config = new DreambotConfiguration();
         config.setAccountUsername(this.mapUsername(accountDetails));
         config.setAccountPassword(this.mapPassword(accountDetails));
+        config.setProxyHost(this.mapProxyHost(accountDetails));
+        config.setProxyPort(this.mapProxyPort(accountDetails));
+        config.setProxyUser(this.mapProxyUser(accountDetails));
+        config.setProxyPass(this.mapProxyPass(accountDetails));
+        config.setWorld(this.mapWorld(accountDetails));
         return config;
+    }
+
+    public String mapProxyPass(AccountDetails accountDetails) {
+        return accountDetails.getProxyPass();
+    }
+
+    public String mapProxyUser(AccountDetails accountDetails) {
+        return accountDetails.getProxyUser();
+    }
+
+    public String mapProxyPort(AccountDetails accountDetails) {
+        return accountDetails.getProxyPort();
+    }
+
+    public String mapProxyHost(AccountDetails accountDetails) {
+        return accountDetails.getProxyHost();
+    }
+
+    public String mapWorld(AccountDetails accountDetails) {
+        return accountDetails.getHomeWorld();
     }
 
     public String mapUsername(AccountDetails accountDetails) {
